@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableRow>
+        <TextView
+            android:text="이게 맞아?">
+        </TextView>
+        <EditText
+            android:text="왜이러는 거야">
+        </EditText>
+    </TableRow>
+    <TableRow>
+        <Button android:text="버튼1">
+        </Button>
+        <Button android:text="버튼2">
+        </Button>
+    </TableRow>
+    <TableRow>
+        <Button android:text="저장">
+        </Button>
+        <Button android:text="취소">
+        </Button>
+    </TableRow>
+</TableLayout>
