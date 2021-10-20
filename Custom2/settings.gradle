@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Custom"
 include ':app'
+include ':multitouch'
