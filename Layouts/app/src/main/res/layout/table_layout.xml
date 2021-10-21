@@ -2,26 +2,70 @@
 <TableLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:stretchColumns="*">
 
-    <TableRow>
-        <TextView
-            android:text="이게 맞아?">
-        </TextView>
-        <EditText
-            android:text="왜이러는 거야">
-        </EditText>
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="1">
+        </Button>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="1">
+        </Button>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="1">
+        </Button>
+
     </TableRow>
-    <TableRow>
-        <Button android:text="버튼1">
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <Button
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="1">
         </Button>
-        <Button android:text="버튼2">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="1">
         </Button>
-    </TableRow>
-    <TableRow>
-        <Button android:text="저장">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="1">
         </Button>
-        <Button android:text="취소">
-        </Button>
-    </TableRow>
+
+    </TableRow><TableRow
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1">
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="1">
+    </Button>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="1">
+    </Button>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="1">
+    </Button>
+
+</TableRow>
 </TableLayout>
