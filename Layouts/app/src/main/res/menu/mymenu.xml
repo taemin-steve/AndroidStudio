@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="사과" />
+    <item android:title="포도" />
+    <item android:title="바나나" />
+</menu>
