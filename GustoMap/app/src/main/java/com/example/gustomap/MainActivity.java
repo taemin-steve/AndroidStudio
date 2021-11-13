@@ -1,9 +1,8 @@
 package com.example.gustomap;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,7 +19,7 @@ import android.widget.PopupMenu;
 
 
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MainActivity extends AppCompatActivity {
 
     Button region;
     private GoogleMap mMap;
@@ -30,10 +29,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         region = (Button) findViewById(R.id.region);
-
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
 
     }
 
@@ -65,27 +60,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         popup.show();
     }
 
-    @Override
-    public void onMapReady(final GoogleMap googleMap) {
 
-        mMap = googleMap;
-
-        LatLng SEOUL = new LatLng(37.56, 126.97);
-
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(SEOUL);
-        markerOptions.title("서울");
-        markerOptions.snippet("한국의 수도");
-        mMap.addMarker(markerOptions);
-
-
-        // 기존에 사용하던 다음 2줄은 문제가 있습니다.
-
-        // CameraUpdateFactory.zoomTo가 오동작하네요.
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
-        //mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL, 10));
-
-
+    public void changeToMap(View view) {
+        Intent intent = new Intent(this, MapActivity.class);
+        startActivity(intent);
     }
 }
