@@ -9,6 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GustoMap">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBbdjqjnuamwIi4wt6SjL-yvaBEnnEATWU" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -18,10 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <meta-data
-            android:name="com.goggle.android.geo.API_KEY"
-            android:value="AIzaSyB7Tyov-4bV2raPO9nqxo50QHqKOpM7ZJI">
-        </meta-data>
     </application>
 
 </manifest>
