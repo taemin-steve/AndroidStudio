@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/okchr/AndroidStudioProjects/GustoMap/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.22037037037037038" />
+        <entry key="..\:/Users/okchr/AndroidStudioProjects/GustoMap/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22037037037037038" />
         <entry key="..\:/Users/okchr/AndroidStudioProjects/GustoMap/app/src/main/res/layout/activity_main.xml" value="0.165" />
         <entry key="..\:/Users/okchr/AndroidStudioProjects/GustoMap/app/src/main/res/layout/map.xml" value="0.1671875" />
+        <entry key="..\:/Users/okchr/AndroidStudioProjects/GustoMap/app/src/main/res/layout/marker_layout.xml" value="0.25" />
         <entry key="..\:/Users/okchr/AndroidStudioProjects/GustoMap/app/src/main/res/menu/mymenu.xml" value="0.22083333333333333" />
       </map>
     </option>
