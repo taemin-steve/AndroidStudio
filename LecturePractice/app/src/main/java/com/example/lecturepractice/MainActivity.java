@@ -1,73 +1,74 @@
 package com.example.lecturepractice;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+    TextView textView;
+
+    MainHandler handler;
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("액티비티 테스트 예제");
-        Log.i("액티비티 테스트", "onCreate()");
 
-        Button btnDial = (Button) findViewById(R.id.btnDial);
-        btnDial.setOnClickListener(new View.OnClickListener() {
+        textView = findViewById(R.id.textView);
+
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                Uri uri = Uri.parse("tel:010-1234-5678");
-                Intent intent = new Intent(Intent.ACTION_DIAL, uri);
-                startActivity(intent);
+                BackgroundThread thread = new BackgroundThread();
+                thread.start();
             }
         });
 
-        Button btnFinish = (Button) findViewById(R.id.btnFinish);
-        btnFinish.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
+        handler = new MainHandler();
+    }
+
+    class BackgroundThread extends Thread {
+        int value = 0;
+        boolean running = true;
+        Thread w = new Thread(new Runnable(){
+            public void run() {
+                for (int i = 0; i < 100; i++) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch(Exception e) {}
+
+                    value += 1;
+                    Log.d("Thread", "value : " + value);
+/*
+                Message message = handler.obtainMessage(); // 메시지 객체 반환
+                Bundle bundle = new Bundle();
+                bundle.putInt("value", value);// 키-값 쌍으로 정보 넣기
+                message.setData(bundle); //메시지 객체에 데이터 넣기
+
+                handler.sendMessage(message); // 메시지 큐로 전송
+*/
+
+                }
             }
-        });
+        })
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.i("액티비티 테스트", "onStart()");
-    }
+    class MainHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) { // 메시지 큐에 있는 메시지 핸들 메소드
+            super.handleMessage(msg);
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.i("액티비티 테스트", "onPause()");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.i("액티비티 테스트", "onStop()");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.i("액티비티 테스트", "onRestart()");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.i("액티비티 테스트", "onResume()");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i("액티비티 테스트", "onDestroy()");
+            Bundle bundle = msg.getData();
+            int value = bundle.getInt("value"); //전달받은 메시지 객체 중에 키가 "value" 인 데이터 처리
+            textView.setText("value 값 : " + value);
+        }
     }
 
 }

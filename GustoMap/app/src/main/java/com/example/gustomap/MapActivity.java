@@ -42,14 +42,20 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         markerOptions.title("서울");
         markerOptions.snippet("한국의 수도");
         mMap.addMarker(markerOptions);
-
-
-        // 기존에 사용하던 다음 2줄은 문제가 있습니다.
-
-        // CameraUpdateFactory.zoomTo가 오동작하네요.
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
-        //mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL, 10));
+
+        //마커를 추가하는 방법까지는 성공.. 그럼 이제 뭘 더해줘야 할까
+        LatLng ririco = new LatLng(37.56352776791311, 126.926132897907);
+        MarkerOptions m1 = new MarkerOptions();
+        m1.position(ririco);
+        m1.title("리리코");
+        m1.snippet("");
+        mMap.addMarker(m1);
+
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL, 10));
+
+
     }
 
     public void returnToMain(View view) {
