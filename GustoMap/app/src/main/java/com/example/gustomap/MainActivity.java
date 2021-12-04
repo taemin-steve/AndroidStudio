@@ -1,9 +1,17 @@
 package com.example.gustomap;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -11,18 +19,20 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.PopupMenu;
-
-
+import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
 
     Button region;
     private GoogleMap mMap;
+    double myLat;
+    double myLon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeToMap(View view) {
         Intent intent = new Intent(this, MapActivity.class);
+        //intent.putExtra("lat", myLat);
+        //intent.putExtra("lon", myLon);
         startActivity(intent);
     }
 }

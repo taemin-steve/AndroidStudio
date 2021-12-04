@@ -3,12 +3,15 @@ package com.example.gustomap;
 public class MarkerItem {
     double lat;
     double lon;
+    String name;
     String link;
 
-    public MarkerItem(double lat, double lon, String link) {
+
+    public MarkerItem(double lat, double lon,String name, String link) {
         this.lat = lat;
         this.lon = lon;
         this.link = link;
+        this.name = name;
     }
 
     public double getLat() {
@@ -25,6 +28,10 @@ public class MarkerItem {
 
     public void setLon(double lon) {
         this.lon = lon;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getLink() {

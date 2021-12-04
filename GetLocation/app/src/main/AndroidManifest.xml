@@ -4,6 +4,7 @@
     package="com.example.getlocation">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -19,6 +20,7 @@
                 <action android:name="android.location.PROVIDERS_CHANGED" />
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.location.PROVIDERS_CHANGED" />
             </intent-filter>
         </activity>
     </application>

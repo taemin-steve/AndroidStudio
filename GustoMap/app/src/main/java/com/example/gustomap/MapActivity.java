@@ -3,19 +3,27 @@ package com.example.gustomap;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,7 +39,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
+public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
 
@@ -53,6 +61,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         mMap = googleMap;
 
+        Intent intent = getIntent();
+        //double myLat = intent.getExtras().getDouble("myLat");
+        //double myLon = intent.getExtras().getDouble("myLon");
+        //LatLng myLatLng = new LatLng(myLat,myLon);
+        //Log.d("MyLocation", Double.toString(myLat));
         LatLng SEOUL = new LatLng(37.56, 126.97);
 
         MarkerOptions markerOptions = new MarkerOptions();
@@ -62,41 +75,35 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mMap.addMarker(markerOptions);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL, 10));
 
-        //마커를 추가하는 방법까지는 성공.. 그럼 이제 뭘 더해줘야 할까
-        //LatLng ririco = new LatLng(37.56352776791311, 126.926132897907);
-        //MarkerOptions m1 = new MarkerOptions();
-        //m1.position(ririco);
-        //m1.title("리리코");
-        //m1.snippet("");
-        //mMap.addMarker(m1);
 
-        //mMap.setOnMarkerClickListener(this);
-        mMap.setOnMapClickListener(this);
+        mMap.setOnMarkerClickListener(this);
         setCustomMarkerView();
         getSampleMarkerItems();
 
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL, 10));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLatLng, 20));
     }
 
     public void returnToMain(View view) {
         finish();
     }
 
-    private void getSampleMarkerItems() {
+    private void getSampleMarkerItems() { //지도에 마커를 만들어주는 부분.
         ArrayList<MarkerItem> sampleList = new ArrayList();
 
-        sampleList.add(new MarkerItem(37.56352776791311, 126.926132897907, "https://www.instagram.com/p/CI5lInDFK69/"));
+        sampleList.add(new MarkerItem(37.56352776791311, 126.926132897907,"ririco ","https://www.instagram.com/p/CI5lInDFK69/"));
 
         for (MarkerItem markerItem : sampleList) {
-            addMarker(markerItem, false);
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(new LatLng(markerItem.getLat(), markerItem.getLon()));
+            markerOptions.title(markerItem.getName());
+            mMap.addMarker(markerOptions);
+            //addMarker(markerItem, false);
         }
     }
 
-    private void setCustomMarkerView() {
+    private void setCustomMarkerView() {// marker_layout을 inflate 해주는 코드
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-
-//        marker_root_view = LayoutInflater.from(this).inflate(R.layout.marker_layout, null);
         marker_root_view = inflater.inflate(R.layout.marker_layout, null);
         tv_marker = (TextView) marker_root_view.findViewById(R.id.tv_marker);
     }
@@ -106,9 +113,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         LatLng position = new LatLng(markerItem.getLat(), markerItem.getLon());
         String link = markerItem.getLink();
+        String name = markerItem.getName();
         //String formatted = NumberFormat.getCurrencyInstance().format((link));
 
-        tv_marker.setText(link);
+        tv_marker.setText(name);
 
         if (isSelectedMarker) {
             tv_marker.setBackgroundResource(R.drawable.ic_marker_phone);
@@ -119,7 +127,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
 
         MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.title(link);
+        markerOptions.title(name);
         markerOptions.position(position);
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(this, marker_root_view)));
 
@@ -146,7 +154,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
     @Override
-    public void onMapClick(@NonNull LatLng latLng) {
+    public boolean onMarkerClick(@NonNull Marker marker) {
 
+        addMarker(new MarkerItem(marker.getPosition().latitude, marker.getPosition().longitude,marker.getTitle(),"https://www.instagram.com/p/CI5lInDFK69/" ), false);
+
+        return false;
     }
 }
