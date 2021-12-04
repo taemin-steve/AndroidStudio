@@ -1,12 +1,18 @@
 package com.example.gustomap;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -25,9 +31,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity {
+
 
     Button region;
     private GoogleMap mMap;
@@ -73,8 +85,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeToMap(View view) {
         Intent intent = new Intent(this, MapActivity.class);
-        //intent.putExtra("lat", myLat);
-        //intent.putExtra("lon", myLon);
+        intent.putExtra("lat", myLat);
+        intent.putExtra("lon", myLon);
+        //Toast.makeText(MainActivity.this, "현재위치 \n위도 " + myLat + "\n경도 " + myLon, Toast.LENGTH_LONG).show();
+
         startActivity(intent);
     }
+
+
 }

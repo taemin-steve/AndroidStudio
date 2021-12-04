@@ -6,9 +6,16 @@
     android:orientation="vertical">
 
     <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="137dp"
+        android:layout_weight="1"
+        android:text="Button" />
+
+    <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
-        android:layout_height="210dp"
+        android:layout_height="92dp"
         android:layout_weight="1"
         android:onClick="returnToMain"
         android:text="Button" />

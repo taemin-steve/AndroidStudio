@@ -36,6 +36,13 @@
                 android:textColor="@color/black"
                 tools:ignore="UsingOnClickInXml" />
 
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/region"
+                android:text="Button" />
+
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="67dp"
