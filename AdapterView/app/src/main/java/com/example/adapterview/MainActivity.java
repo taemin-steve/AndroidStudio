@@ -82,15 +82,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
             TextView title = (TextView) rowView.findViewById(R.id.title);
-            TextView rating = (TextView) rowView.findViewById(R.id.rating);
+            //TextView rating = (TextView) rowView.findViewById(R.id.rating);
             TextView genre = (TextView) rowView.findViewById(R.id.genre);
-            TextView year = (TextView) rowView.findViewById(R.id.releaseYear);
+            //TextView year = (TextView) rowView.findViewById(R.id.releaseYear);
 
             title.setText(titles[position]);
             imageView.setImageResource(images[position]);
-            rating.setText("9.0" + position);
+            //rating.setText("9.0" + position);
             genre.setText("DRAMA");
-            year.setText(1930 + position + "");
+            //year.setText(1930 + position + "");
             return rowView;
 
         }
