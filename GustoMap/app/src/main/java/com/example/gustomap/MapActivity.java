@@ -58,7 +58,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
     private GoogleMap mMap;
-
+    MyItem myItem = new MyItem();
     View marker_root_view;
     TextView tv_marker;
 
@@ -73,15 +73,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         //////////////////////////////////////////
         if (!checkLocationServicesStatus()) {
-
             showDialogForLocationServiceSetting();
         }else {
-
             checkRunTimePermission();
         }
-
-        //final TextView textview_address = (TextView)findViewById(R.id.textview);
-
 
         Button ShowLocationButton = (Button) findViewById(R.id.button2);
         ShowLocationButton.setOnClickListener(new View.OnClickListener()
@@ -89,22 +84,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onClick(View arg0)
             {
-
-                gpsTracker = new GpsTracker(MapActivity.this);
-
+                gpsTracker = new GpsTracker(MapActivity.this); // 이거 oncreate으로 옴겨서 사용해도 문제는 없을거같은데...?
                 double latitude = gpsTracker.getLatitude();
                 double longitude = gpsTracker.getLongitude();
 
-                //String address = getCurrentAddress(latitude, longitude);
                 LatLng myLatLng = new LatLng(latitude, longitude);
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLatLng, 15));
-                //textview_address.setText(address);
 
                 Toast.makeText(MapActivity.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
             }
         });
-
-
     }
 
     @Override
@@ -112,28 +101,24 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         mMap = googleMap;
 
-        Intent intent =  getIntent();
-        double myLat = intent.getExtras().getDouble("myLat");
-        double myLon = intent.getExtras().getDouble("myLon");
-        LatLng myLatLng = new LatLng(myLat,myLon);
-        Toast.makeText(MapActivity.this, "현재위치 \n위도 " + myLat + "\n경도 " + myLon, Toast.LENGTH_LONG).show();
-
         LatLng SEOUL = new LatLng(37.56, 126.97);
 
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(SEOUL);
-        markerOptions.title("서울");
-        markerOptions.snippet("한국의 수도");
-        mMap.addMarker(markerOptions);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SEOUL, 10));
+        MarkerOptions markerOptions = new MarkerOptions(); // 지도에 마커를 찍어주는 과정
+        for( int i = 0; i <= 29; i++ ){
+            markerOptions.position(myItem.postion[i]);
+            markerOptions.title(myItem.titles[i]);
+            mMap.addMarker(markerOptions);
+        }
 
+        gpsTracker = new GpsTracker(MapActivity.this);//현재 자신의 위치를 지도의 중심으로 설정, 화면 이동
+        double latitude = gpsTracker.getLatitude();
+        double longitude = gpsTracker.getLongitude();
+        LatLng myPosition = new LatLng(latitude,longitude);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 15));
 
         mMap.setOnMarkerClickListener(this);
-        setCustomMarkerView();
-        getSampleMarkerItems();
-
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLatLng, 20));
+        //setCustomMarkerView();
+        //getSampleMarkerItems();
     }
 
     public void returnToMain(View view) {
@@ -141,17 +126,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     private void getSampleMarkerItems() { //지도에 마커를 만들어주는 부분.
-        ArrayList<MarkerItem> sampleList = new ArrayList();
+        //ArrayList<MyItem> sampleList = new ArrayList();
 
-        sampleList.add(new MarkerItem(37.56352776791311, 126.926132897907,"리리코 ","https://www.instagram.com/p/CI5lInDFK69/"));
+        //sampleList.add(new MyItem());
 
-        for (MarkerItem markerItem : sampleList) {
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(new LatLng(markerItem.getLat(), markerItem.getLon()));
-            markerOptions.title(markerItem.getName());
-            mMap.addMarker(markerOptions);
-            //addMarker(markerItem, false);
-        }
+//        //for (MarkerItem markerItem : sampleList) {
+//          //  MarkerOptions markerOptions = new MarkerOptions();
+//            markerOptions.position(new LatLng(markerItem.getLat(), markerItem.getLon()));
+//            markerOptions.title(markerItem.getName());
+//            mMap.addMarker(markerOptions);
+//            //addMarker(markerItem, false);
+//        }
     }
 
     private void setCustomMarkerView() {// marker_layout을 inflate 해주는 코드
@@ -166,42 +151,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         LatLng position = new LatLng(markerItem.getLat(), markerItem.getLon());
         String link = markerItem.getLink();
         String name = markerItem.getName();
-        //String formatted = NumberFormat.getCurrencyInstance().format((link));
 
         tv_marker.setText(name);
-
-        if (isSelectedMarker) {
-            tv_marker.setBackgroundResource(R.drawable.ic_marker_phone);
-            tv_marker.setTextColor(Color.WHITE);
-        } else {
-            tv_marker.setBackgroundResource(R.drawable.ic_marker_phone);
-            tv_marker.setTextColor(Color.BLACK);
-        }
 
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.title(name);
         markerOptions.position(position);
-        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(this, marker_root_view)));
 
 
         return mMap.addMarker(markerOptions);
 
-    }
-
-    private Bitmap createDrawableFromView(Context context, View view) {
-
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels);
-        view.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels);
-        view.buildDrawingCache();
-        Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
-
-        Canvas canvas = new Canvas(bitmap);
-        view.draw(canvas);
-
-        return bitmap;
     }
 
 
