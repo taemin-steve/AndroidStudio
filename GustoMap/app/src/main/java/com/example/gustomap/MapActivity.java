@@ -143,7 +143,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private void getSampleMarkerItems() { //지도에 마커를 만들어주는 부분.
         ArrayList<MarkerItem> sampleList = new ArrayList();
 
-        sampleList.add(new MarkerItem(37.56352776791311, 126.926132897907,"ririco ","https://www.instagram.com/p/CI5lInDFK69/"));
+        sampleList.add(new MarkerItem(37.56352776791311, 126.926132897907,"리리코 ","https://www.instagram.com/p/CI5lInDFK69/"));
 
         for (MarkerItem markerItem : sampleList) {
             MarkerOptions markerOptions = new MarkerOptions();
@@ -286,43 +286,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         }
     }
-
-
-//    public String getCurrentAddress( double latitude, double longitude) {
-//
-//        //지오코더... GPS를 주소로 변환
-//        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-//
-//        List<Address> addresses;
-//
-//        try {
-//
-//            addresses = geocoder.getFromLocation(
-//                    latitude,
-//                    longitude,
-//                    7);
-//        } catch (IOException ioException) {
-//            //네트워크 문제
-//            Toast.makeText(this, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();
-//            return "지오코더 서비스 사용불가";
-//        } catch (IllegalArgumentException illegalArgumentException) {
-//            Toast.makeText(this, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
-//            return "잘못된 GPS 좌표";
-//
-//        }
-//
-//
-//
-//        if (addresses == null || addresses.size() == 0) {
-//            Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
-//            return "주소 미발견";
-//
-//        }
-//
-//        Address address = addresses.get(0);
-//        return address.getAddressLine(0).toString()+"\n";
-//
-//    }
 
 
     //여기부터는 GPS 활성화를 위한 메소드들

@@ -49,26 +49,10 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
 
-    ListView list;
-    String[] titles = {
-            "리리코",
-            "Citizen Kane (1941)",
-    } ;
-    Integer[] images = {
-            R.drawable.ririco,
-            R.drawable.movie2,
-    };
-    String[] rinks = {
-            "https://www.instagram.com/p/CI5lInDFK69/",
-            "Citizen Kane (1941)",
-    } ;
-
     Button region;
     private GoogleMap mMap;
     double myLat;
     double myLon;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,14 +83,20 @@ public class MainActivity extends AppCompatActivity {
                         switch(item.getItemId())
                         {
                              case R.id.연남:
-                                region.setText("연남");
+                                region.setText("연남/홍대");
                                 YN();
                                 break;
-                             case R.id.이태원:
-                                region.setText("이태원");
+                             case R.id.신사:
+                                region.setText("신사/압구정");
+                                SS();
+                                break;
+                            case R.id.강남:
+                                region.setText("강남/논현/잠실");
+                                GN();
                                 break;
                              case R.id.익선:
-                                region.setText("익선");
+                                region.setText("익선/을지로");
+                                YS();
                                 break;
                         }
                         return false;
@@ -160,15 +150,206 @@ public class MainActivity extends AppCompatActivity {
     
     public void YN(){
         titles = new String[]{
-                "리리코오",
-                "Citizen Kane (1941)",
+                "리리코",
+                "유니의 우아한식탁 ",
+                "버바나",
+                "감칠",
+                "와이탑",
+                "올더플레이트",
+                "심원",
+                "미담진족",
+                "더 피자 보이즈",
+                "홍정기 참치"
         };
+        images = new Integer[]{
+                R.drawable.ririco,
+                R.drawable.uni,
+                R.drawable.burbana,
+                R.drawable.gamchil,
+                R.drawable.whytop,
+                R.drawable.alltheplate,
+                R.drawable.simone,
+                R.drawable.midam,
+                R.drawable.thepizzaboys,
+                R.drawable.hong,
+        };
+        rinks = new String[]{
+                "https://www.instagram.com/p/CI5lInDFK69/",
+                "https://www.instagram.com/p/CLy4jF1FT4g/?utm_medium=copy_link",
+                "https://www.instagram.com/bbang_byeol/p/COW-ST7lnuH/?utm_medium=copy_link",
+                "https://www.instagram.com/bbang_byeol/p/CLvV0iTlkXt/?utm_medium=copy_link",
+                "https://www.instagram.com/p/CVcoR9HFg6H/?utm_medium=copy_link",
+                "https://www.instagram.com/p/CNt_c7Pligy/?utm_medium=copy_link",
+                "https://www.instagram.com/p/CMjMffpFLj4/?utm_medium=copy_link",
+                "https://www.instagram.com/p/CWabS3YFjy8/?utm_medium=copy_link",
+                "https://www.instagram.com/bbang_byeol/p/CKtXURPFYdd/?utm_medium=copy_link",
+                "https://www.instagram.com/bbang_byeol/p/CRgJJqgliGT/?utm_medium=copy_link"
+        } ;
 
         CustomList adapter = new CustomList(MainActivity.this);
         list = (ListView) findViewById(R.id.list);
         list.setAdapter(adapter);
-
     }
 
+    public void SS(){
+        titles = new String[]{
+                "골뱅이신사",
+                "우니도",
+                "신사 치킨 클럽",
+                "신사의 바램",
+                "콘피에르",
+                "무탄",
+
+        };
+        images = new Integer[]{
+                R.drawable.goal,
+                R.drawable.unido,
+                R.drawable.sinsaclub,
+                R.drawable.barlamb,
+                R.drawable.confere,
+                R.drawable.jokbal,
+                R.drawable.mutan,
+
+        };
+        rinks = new String[]{
+                "https://www.instagram.com/p/CVzKI0QFrrG/?utm_medium=copy_link",
+                "https://www.instagram.com/p/CQsNY-EFZa7/?utm_medium=copy_link",
+                "https://www.instagram.com/p/CSD8aqNFYdR/?utm_medium=copy_link",
+                "https://www.instagram.com/bbang_byeol/p/CSgAYyhFDsX/?utm_medium=copy_link",
+                "https://www.instagram.com/p/CW2MiAAlYnU/?utm_medium=copy_link",
+                "https://www.instagram.com/p/CQkk6F4FLIA/?utm_medium=copy_link",
+                "https://www.instagram.com/p/CTEi769F_g1/?utm_medium=copy_link",
+
+        } ;
+
+        CustomList adapter = new CustomList(MainActivity.this);
+        list = (ListView) findViewById(R.id.list);
+        list.setAdapter(adapter);
+    }
+
+    public void GN(){
+        titles = new String[]{
+                "스시롭다",
+                "포크댄스",
+                "베트남이랑",
+                "조양관",
+                "스카이가든",
+                "르띠"
+
+        };
+        images = new Integer[]{
+                R.drawable.susi,
+                R.drawable.porkdance,
+                R.drawable.batnam,
+                R.drawable.joyang,
+                R.drawable.skygarden,
+                R.drawable.letti,
+
+        };
+        rinks = new String[]{
+                "https://www.instagram.com/p/CQfOEHoFOem/?utm_medium=copy_link",
+                "https://www.instagram.com/p/CU9W9JBlgLe/?utm_medium=copy_link",
+                "https://www.instagram.com/bbang_byeol/p/CL-3t79lpWZ/?utm_medium=copy_link",
+                "https://www.instagram.com/bbang_byeol/p/COeqlzAlrhO/?utm_medium=copy_link",
+                "https://www.instagram.com/p/CPVAZoMlyvJ/?utm_medium=copy_link",
+                "https://www.instagram.com/p/CPuYqv_loVQ/?utm_medium=copy_link"
+
+        } ;
+
+        CustomList adapter = new CustomList(MainActivity.this);
+        list = (ListView) findViewById(R.id.list);
+        list.setAdapter(adapter);
+    }
+
+    public void YS(){
+        titles = new String[]{
+                "경양카츠",
+                "워터밀",
+                "저스트텐동",
+                "실낙원",
+                "기러기 둥지",
+                "송암여관",
+                "을지깐깐",
+                "을지다락",
+
+
+
+        };
+        images = new Integer[]{
+                R.drawable.kungyang,
+                R.drawable.watermeal,
+                R.drawable.justtd,
+                R.drawable.narkone,
+                R.drawable.kirukinest,
+                R.drawable.songarm,
+                R.drawable.kankan,
+                R.drawable.darrock,
+
+        };
+        rinks = new String[]{
+                "https://www.instagram.com/bbang_byeol/p/CUHsGJRlmF7/?utm_medium=copy_link",
+                "https://www.instagram.com/p/CO7fEpjFGRG/?utm_medium=copy_link",
+                "https://www.instagram.com/p/CNmv_3sF135/?utm_medium=copy_link",
+                "https://www.instagram.com/p/CM3hQUYlixR/?utm_medium=copy_link",
+                "https://www.instagram.com/bbang_byeol/p/CJQi1MZFDs1/?utm_medium=copy_link",
+                "https://www.instagram.com/bbang_byeol/p/CO2IwsgFTur/?utm_medium=copy_link",
+                "https://www.instagram.com/p/CSL-aywljWz/?utm_medium=copy_link",
+                "https://www.instagram.com/bbang_byeol/p/CTMaOkwFiaj/?utm_medium=copy_link",
+
+
+        } ;
+
+        CustomList adapter = new CustomList(MainActivity.this);
+        list = (ListView) findViewById(R.id.list);
+        list.setAdapter(adapter);
+    }
+
+    ListView list;
+    String[] titles = {
+            "리리코",
+            "골뱅이신사",
+            "경양카츠",
+            "스시롭다",
+            "유니의 우아한식탁 ",
+            "버바나",
+            "감칠",
+            "와이탑",
+            "올더플레이트",
+            "심원",
+            "미담진족",
+            "더 피자 보이즈",
+            "홍정기 참치"
+    } ;
+    Integer[] images = {
+            R.drawable.ririco,
+            R.drawable.goal,
+            R.drawable.kungyang,
+            R.drawable.susi,
+            R.drawable.uni,
+            R.drawable.burbana,
+            R.drawable.gamchil,
+            R.drawable.whytop,
+            R.drawable.alltheplate,
+            R.drawable.simone,
+            R.drawable.midam,
+            R.drawable.thepizzaboys,
+            R.drawable.hong,
+    };
+    String[] rinks = {
+            "https://www.instagram.com/p/CI5lInDFK69/",
+            "https://www.instagram.com/p/CVzKI0QFrrG/?utm_medium=copy_link",
+            "https://www.instagram.com/bbang_byeol/p/CUHsGJRlmF7/?utm_medium=copy_link",
+            "https://www.instagram.com/p/CQfOEHoFOem/?utm_medium=copy_link",
+            "https://www.instagram.com/p/CI5lInDFK69/",
+            "https://www.instagram.com/p/CLy4jF1FT4g/?utm_medium=copy_link",
+            "https://www.instagram.com/bbang_byeol/p/COW-ST7lnuH/?utm_medium=copy_link",
+            "https://www.instagram.com/bbang_byeol/p/CLvV0iTlkXt/?utm_medium=copy_link",
+            "https://www.instagram.com/p/CVcoR9HFg6H/?utm_medium=copy_link",
+            "https://www.instagram.com/p/CNt_c7Pligy/?utm_medium=copy_link",
+            "https://www.instagram.com/p/CMjMffpFLj4/?utm_medium=copy_link",
+            "https://www.instagram.com/p/CWabS3YFjy8/?utm_medium=copy_link",
+            "https://www.instagram.com/bbang_byeol/p/CKtXURPFYdd/?utm_medium=copy_link",
+            "https://www.instagram.com/bbang_byeol/p/CRgJJqgliGT/?utm_medium=copy_link"
+    } ;
 
 }

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="연남"
+    <item android:title="연남/홍대"
         android:id="@+id/연남" />
-    <item android:title="이태원"
-        android:id="@+id/이태원"/>
-    <item android:title="익선"
+    <item android:title="익선/을지로"
         android:id="@+id/익선"/>
+    <item android:title="신사/압구정"
+        android:id="@+id/신사"/>
+    <item android:title="강남/논현/잠실"
+        android:id="@+id/강남"/>
 </menu>

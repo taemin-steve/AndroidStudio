@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -22,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:text="어느 지역의 맛집을 찾아볼까?"
+                android:textColor="@color/purple_500"
                 android:textSize="8sp" />
 
             <Button
