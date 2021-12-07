@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.location.Address;
@@ -25,6 +26,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,8 +61,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     MyItem myItem = new MyItem();
-    View marker_root_view;
-    TextView tv_marker;
+    MarkerOptions positionMarker = new MarkerOptions();
+    Marker currentMarker;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,17 +81,19 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             checkRunTimePermission();
         }
 
-        Button ShowLocationButton = (Button) findViewById(R.id.button2);
+        ImageButton ShowLocationButton = (ImageButton) findViewById(R.id.point);
         ShowLocationButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View arg0)
             {
+                currentMarker.remove();
                 gpsTracker = new GpsTracker(MapActivity.this); // 이거 oncreate으로 옴겨서 사용해도 문제는 없을거같은데...?
                 double latitude = gpsTracker.getLatitude();
                 double longitude = gpsTracker.getLongitude();
-
                 LatLng myLatLng = new LatLng(latitude, longitude);
+                positionMarker.position(myLatLng);
+                currentMarker = mMap.addMarker(positionMarker);
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLatLng, 15));
 
                 Toast.makeText(MapActivity.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
@@ -107,6 +112,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         for( int i = 0; i <= 29; i++ ){
             markerOptions.position(myItem.postion[i]);
             markerOptions.title(myItem.titles[i]);
+            markerOptions.snippet(myItem.rinks[i]);
             mMap.addMarker(markerOptions);
         }
 
@@ -114,62 +120,30 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         double latitude = gpsTracker.getLatitude();
         double longitude = gpsTracker.getLongitude();
         LatLng myPosition = new LatLng(latitude,longitude);
+        positionMarker.title("현재위치");
+        positionMarker.position(myPosition);
+        Bitmap cursor = BitmapFactory.decodeResource(getResources(), R.drawable.point);
+        Bitmap.createScaledBitmap(cursor, 200, 200, false);
+        positionMarker.icon(BitmapDescriptorFactory.fromBitmap(cursor));
+        currentMarker = mMap.addMarker(positionMarker);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 15));
-
         mMap.setOnMarkerClickListener(this);
-        //setCustomMarkerView();
-        //getSampleMarkerItems();
     }
 
     public void returnToMain(View view) {
         finish();
     }
 
-    private void getSampleMarkerItems() { //지도에 마커를 만들어주는 부분.
-        //ArrayList<MyItem> sampleList = new ArrayList();
-
-        //sampleList.add(new MyItem());
-
-//        //for (MarkerItem markerItem : sampleList) {
-//          //  MarkerOptions markerOptions = new MarkerOptions();
-//            markerOptions.position(new LatLng(markerItem.getLat(), markerItem.getLon()));
-//            markerOptions.title(markerItem.getName());
-//            mMap.addMarker(markerOptions);
-//            //addMarker(markerItem, false);
-//        }
-    }
-
-    private void setCustomMarkerView() {// marker_layout을 inflate 해주는 코드
-        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        marker_root_view = inflater.inflate(R.layout.marker_layout, null);
-        tv_marker = (TextView) marker_root_view.findViewById(R.id.tv_marker);
-    }
-
-    private Marker addMarker(MarkerItem markerItem, boolean isSelectedMarker) {
-
-
-        LatLng position = new LatLng(markerItem.getLat(), markerItem.getLon());
-        String link = markerItem.getLink();
-        String name = markerItem.getName();
-
-        tv_marker.setText(name);
-
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.title(name);
-        markerOptions.position(position);
-
-
-        return mMap.addMarker(markerOptions);
-
-    }
-
 
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
-
-        addMarker(new MarkerItem(marker.getPosition().latitude, marker.getPosition().longitude,marker.getTitle(),"https://www.instagram.com/p/CI5lInDFK69/" ), false);
-
-        return false;
+        if(marker.getTitle().equals("현재위치")) return true;
+        Intent intent = new Intent(this, PopUpActivity.class);
+        intent.putExtra("title", marker.getTitle());
+        intent.putExtra("rink", marker.getSnippet());
+        //intent.putExtra("image", marker.getZIndex());
+        startActivity(intent);
+        return true;
     }
 
     //////////////////////////////////////////////////////////////////////////

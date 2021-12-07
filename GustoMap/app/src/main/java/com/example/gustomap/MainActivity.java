@@ -117,10 +117,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeToMap(View view) {
         Intent intent = new Intent(this, MapActivity.class);
-        intent.putExtra("lat", myLat);
-        intent.putExtra("lon", myLon);
-        //Toast.makeText(MainActivity.this, "현재위치 \n위도 " + myLat + "\n경도 " + myLon, Toast.LENGTH_LONG).show();
-
         startActivity(intent);
     }
 

@@ -18,9 +18,9 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/image"
         android:layout_toRightOf="@id/image"
-        android:textSize="20dp"
+        android:textSize="25dp"
         android:textStyle="bold"
-        android:textColor="#666666"
+        android:textColor="@color/black"
         />
 
     <!--    <TextView-->
@@ -36,11 +36,10 @@
         android:id="@+id/rink"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title"
-        android:layout_marginTop="5dp"
+        android:layout_alignBottom="@id/image"
         android:layout_toRightOf="@+id/image"
-        android:textColor="#666666"
-        android:textSize="13dip" />
+        android:textColor="#aaaaaa"
+        android:textSize="10dip" />
 
     <!--    <TextView-->
     <!--        android:id="@+id/releaseYear"-->

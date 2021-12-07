@@ -5,27 +5,41 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="137dp"
-        android:layout_weight="1"
-        android:text="Button" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="92dp"
-        android:layout_weight="1"
-        android:onClick="returnToMain"
-        android:text="Button" />
+
 
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        tools:context=".MapsActivity" />
+        android:layout_height="match_parent"
+        tools:context=".MapsActivity" >
+
+        <ImageButton
+            android:id="@+id/point"
+            android:src="@drawable/marker"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:text="Button"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_gravity="left|bottom"
+            android:paddingBottom="40dp"
+            />
+
+        <ImageButton
+            android:src="@drawable/re"
+            android:id="@+id/button"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:onClick="returnToMain"
+            android:text="Button"
+            android:background="#00ffffff"
+            android:layout_gravity="right|top"
+            />
+    </fragment>
+
 
 
 </LinearLayout>
