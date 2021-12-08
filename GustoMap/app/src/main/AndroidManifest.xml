@@ -17,14 +17,15 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBbdjqjnuamwIi4wt6SjL-yvaBEnnEATWU" />
 
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
+        <activity android:name=".RoadingActivity" android:label="start" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.location.PROVIDERS_CHANGED" />
+                <!--                <action android:name="android.location.PROVIDERS_CHANGED" />-->
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity">
         </activity>
         <activity android:name=".MapActivity" android:label="GustoMap"></activity>
         <activity android:name=".PopUpActivity" android:label=".PopUpActivity" android:theme="@android:style/Theme.Dialog"></activity>
