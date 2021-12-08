@@ -93,6 +93,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         MarkerOptions markerOptions = new MarkerOptions(); // 지도에 모든 식당에 해당하는 마커 생성
+        Bitmap RestaurantCursor = BitmapFactory.decodeResource(getResources(), R.drawable.restaurant);// 이미지를 bitmap 으로 변환
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(RestaurantCursor));
         for( int i = 0; i <= 29; i++ ){
             markerOptions.position(restaurantList.postion[i]);// 마커 위도 경도 설정
             markerOptions.title(restaurantList.titles[i]);// 마커의 이름 설정
@@ -112,7 +114,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         //마커를 다른 모양의 마커로 변경
         Bitmap cursor = BitmapFactory.decodeResource(getResources(), R.drawable.point);// 이미지를 bitmap 으로 변환
-        Bitmap.createScaledBitmap(cursor, 200, 200, false);
         positionMarker.icon(BitmapDescriptorFactory.fromBitmap(cursor));
 
         currentMarker = mMap.addMarker(positionMarker);
