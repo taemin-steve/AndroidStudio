@@ -4,37 +4,22 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -44,25 +29,23 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.io.IOException;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
-    private GpsTracker gpsTracker;
+    private GpsTracker gpsTracker; // GPS 현재 위치 수신을 위한 서비스 클래스
+
+    // GPS 수신을 위한 변수들
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
 
+    //지도, 지도위의 마커를 위한 변수들
+    private GoogleMap mMap; // 지도 객체
+    MarkerOptions positionMarker = new MarkerOptions(); // 사용자의 현재 위치를 나타내기 위한 MarkerOptions 객체
+    Marker currentMarker; // 사용자의 현재 위치를 알려주는 marker 객체
 
-    private GoogleMap mMap;
-    MyItem myItem = new MyItem();
-    MarkerOptions positionMarker = new MarkerOptions();
-    Marker currentMarker;
+    // 식당 정보를 담고 있는 객체
+    RestaurantList restaurantList = new RestaurantList();
 
 
     @Override
@@ -70,31 +53,34 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        // 지도 생성
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        //////////////////////////////////////////
+        // GPS 권한확인
         if (!checkLocationServicesStatus()) {
             showDialogForLocationServiceSetting();
         }else {
             checkRunTimePermission();
         }
 
+        // point 버튼이 눌리면 사용자의 현재위치 정보를 받아오도록 설정
         ImageButton ShowLocationButton = (ImageButton) findViewById(R.id.point);
         ShowLocationButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View arg0)
             {
-                currentMarker.remove();
-                gpsTracker = new GpsTracker(MapActivity.this); // 이거 oncreate으로 옴겨서 사용해도 문제는 없을거같은데...?
+                currentMarker.remove(); // 기존에 사용자의 위치를 나타내는 마커 제거
+
+                gpsTracker = new GpsTracker(MapActivity.this); // GPS 서비스 객체 생성
                 double latitude = gpsTracker.getLatitude();
                 double longitude = gpsTracker.getLongitude();
-                LatLng myLatLng = new LatLng(latitude, longitude);
+                LatLng myLatLng = new LatLng(latitude, longitude); // 현재 위치 정보 저장
+
                 positionMarker.position(myLatLng);
                 currentMarker = mMap.addMarker(positionMarker);
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLatLng, 15));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLatLng, 15));// 해당 지점을 map 중앙에 배치
 
                 Toast.makeText(MapActivity.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
             }
@@ -106,47 +92,56 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         mMap = googleMap;
 
-        LatLng SEOUL = new LatLng(37.56, 126.97);
-
-        MarkerOptions markerOptions = new MarkerOptions(); // 지도에 마커를 찍어주는 과정
+        MarkerOptions markerOptions = new MarkerOptions(); // 지도에 모든 식당에 해당하는 마커 생성
         for( int i = 0; i <= 29; i++ ){
-            markerOptions.position(myItem.postion[i]);
-            markerOptions.title(myItem.titles[i]);
-            markerOptions.snippet(myItem.rinks[i]);
+            markerOptions.position(restaurantList.postion[i]);// 마커 위도 경도 설정
+            markerOptions.title(restaurantList.titles[i]);// 마커의 이름 설정
+            markerOptions.snippet(restaurantList.rinks[i]);// 마커에 해당하는 음식점의 링크를 제공
             mMap.addMarker(markerOptions);
+            // 해당 부분에서 설정한 것은 지도에서는 나타나지 않는다. (클릭하면 나타나는 것인데, onMarkerClick 을 오버라이딩 하였음)
+            // 단 클릭 하였을때 해당 정보들을 이용하여 다른 액티비티에 정보 전달.
         }
 
-        gpsTracker = new GpsTracker(MapActivity.this);//현재 자신의 위치를 지도의 중심으로 설정, 화면 이동
+        //현재위치를 이용해서 마커 생성
+        gpsTracker = new GpsTracker(MapActivity.this);
         double latitude = gpsTracker.getLatitude();
         double longitude = gpsTracker.getLongitude();
         LatLng myPosition = new LatLng(latitude,longitude);
         positionMarker.title("현재위치");
         positionMarker.position(myPosition);
-        Bitmap cursor = BitmapFactory.decodeResource(getResources(), R.drawable.point);
+
+        //마커를 다른 모양의 마커로 변경
+        Bitmap cursor = BitmapFactory.decodeResource(getResources(), R.drawable.point);// 이미지를 bitmap 으로 변환
         Bitmap.createScaledBitmap(cursor, 200, 200, false);
         positionMarker.icon(BitmapDescriptorFactory.fromBitmap(cursor));
+
         currentMarker = mMap.addMarker(positionMarker);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 15));
         mMap.setOnMarkerClickListener(this);
     }
 
+    // 뒤로가기 버튼의 콜백 함수. 해당 액티비티를 종료 시킨다.
     public void returnToMain(View view) {
         finish();
     }
 
-
+    // 마커가 클릭되었을 때 해당 음식점의 세부 정보를 팝업창 형태의 액티비티를 실행시키는 함수.
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
-        if(marker.getTitle().equals("현재위치")) return true;
+
+        if(marker.getTitle().equals("현재위치")) return true; // 사용자의 현재 위치를 나타내는 커서 클릭에 대한 예외 처리
+
         Intent intent = new Intent(this, PopUpActivity.class);
-        intent.putExtra("title", marker.getTitle());
-        intent.putExtra("rink", marker.getSnippet());
-        //intent.putExtra("image", marker.getZIndex());
+        intent.putExtra("title", marker.getTitle());// 이름 정보를 새로운 액티비티에 제공
+        intent.putExtra("rink", marker.getSnippet());// rink 정보를 새로운 액티비티에 제공
+
         startActivity(intent);
         return true;
     }
 
-    //////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // 아래부터는 GPS를 사용하기 위한 코드
+
     @Override
     public void onRequestPermissionsResult(int permsRequestCode,
                                            @NonNull String[] permissions,
@@ -167,12 +162,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 }
             }
             if (check_result) {
-
                 //위치 값을 가져올 수 있음
                 ;
             } else {
                 // 거부한 퍼미션이 있다면 앱을 사용할 수 없는 이유를 설명해주고 앱을 종료합니다.2 가지 경우가 있습니다.
-
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])
                         || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[1])) {
                     Toast.makeText(MapActivity.this, "퍼미션이 거부되었습니다. 앱을 다시 실행하여 퍼미션을 허용해주세요.", Toast.LENGTH_LONG).show();

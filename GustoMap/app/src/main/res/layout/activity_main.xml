@@ -37,7 +37,7 @@
                 android:layout_marginTop="0dp"
                 android:background="#00ff0000"
                 android:onClick="selectRegion"
-                android:text=" 지역선택∨"
+                android:text=" 지역선택 ∨"
                 android:textColor="@color/black"
                 tools:ignore="UsingOnClickInXml" />
 

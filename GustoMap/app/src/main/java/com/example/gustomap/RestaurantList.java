@@ -2,7 +2,7 @@ package com.example.gustomap;
 
 import com.google.android.gms.maps.model.LatLng;
 
-public class MyItem {
+public class RestaurantList {
     String[] titles = {
             "리리코", "유니의 우아한식탁 ", "버바나", "감칠", "와이탑", "올더플레이트", "심원", "미담진족", "더 피자 보이즈", "홍정기 참치",
             // 연남 index 0~9
