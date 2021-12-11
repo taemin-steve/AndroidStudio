@@ -82,7 +82,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 currentMarker = mMap.addMarker(positionMarker);
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLatLng, 15));// 해당 지점을 map 중앙에 배치
 
-                Toast.makeText(MapActivity.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
+                //Toast.makeText(MapActivity.this, "현재위치 \n위도 " + latitude + "\n경도 " + longitude, Toast.LENGTH_LONG).show();
             }
         });
     }

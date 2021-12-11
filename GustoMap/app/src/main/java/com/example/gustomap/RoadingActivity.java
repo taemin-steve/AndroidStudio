@@ -1,6 +1,8 @@
 package com.example.gustomap;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,8 +20,25 @@ public class RoadingActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.roding_page);
 
+
+        // 1.75초가 지난후 다이얼로그 생성, ok 버튼을 누르면 Main Activity로 진행
         new Handler().postDelayed(new Runnable() { @Override public void run() {
-            Intent intent = new Intent(RoadingActivity.this, MainActivity.class); startActivity(intent); }
-            }, 3000);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(RoadingActivity.this);
+            builder.setTitle("GPS를 키고 사용해 주세요!").setMessage("");
+
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener(){
+                @Override
+                public void onClick(DialogInterface dialog, int id)
+                {
+                    Intent intent = new Intent(RoadingActivity.this, MainActivity.class); startActivity(intent);
+                }
+            });
+
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+
+        }
+        }, 1750);
     }
 }

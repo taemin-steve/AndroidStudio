@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         region = (Button) findViewById(R.id.region);
 
-        makeNewListView(0,30); // 리스트 뷰를 생성해주는 사용자 정의 함수
+        makeNewListView(0,31); // 리스트 뷰를 생성해주는 사용자 정의 함수
     }
 
     // 팝업 메뉴중 클릭된 지역에 맞는 리스트 뷰를 생성. (region 버튼의 콜백함수)
