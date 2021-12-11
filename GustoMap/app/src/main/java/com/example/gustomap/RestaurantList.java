@@ -6,32 +6,28 @@ public class RestaurantList {
     String[] titles = {
             "리리코", "유니의 우아한식탁 ", "버바나", "감칠", "와이탑", "올더플레이트", "심원", "미담진족", "더 피자 보이즈", "홍정기 참치",
             // 연남 index 0~9
-            "골뱅이신사", "우니도", "신사 치킨 클럽", "신사의 바램", "콘피에르", "무탄",
+            "골뱅이신사", "우니도", "신사 치킨 클럽", "신사의 바램", "콘피에르", "그믐족발",
             // 신사 10~15
-            "스시롭다", "포크댄스", "베트남이랑", "조양관", "스카이가든", "르띠",
-            // 강남 16~21
+            "무탄", "스시롭다", "포크댄스", "베트남이랑", "조양관", "스카이가든", "르띠",
+            // 강남 16~22
             "경양카츠", "워터밀", "저스트텐동", "실낙원", "기러기 둥지", "송암여관", "을지깐깐", "을지다락",
-            //익선 22~29
+            //익선 23~30
     };
     Integer[] images = {
             R.drawable.ririco, R.drawable.uni, R.drawable.burbana, R.drawable.gamchil, R.drawable.whytop, R.drawable.alltheplate, R.drawable.simone, R.drawable.midam, R.drawable.thepizzaboys, R.drawable.hong,
             // 연남 index 0~9
-            R.drawable.goal, R.drawable.unido, R.drawable.sinsaclub, R.drawable.barlamb, R.drawable.confere, R.drawable.jokbal, R.drawable.mutan,
+            R.drawable.goal, R.drawable.unido, R.drawable.sinsaclub, R.drawable.barlamb, R.drawable.confere, R.drawable.jokbal,
             // 신사 9~15
-            R.drawable.susi, R.drawable.porkdance, R.drawable.batnam, R.drawable.joyang, R.drawable.skygarden, R.drawable.letti,
-            // 강남 16~21
+            R.drawable.mutan, R.drawable.susi, R.drawable.porkdance, R.drawable.batnam, R.drawable.joyang, R.drawable.skygarden, R.drawable.letti,
+            // 강남 16~22
             R.drawable.kungyang, R.drawable.watermeal, R.drawable.justtd, R.drawable.narkone, R.drawable.kirukinest, R.drawable.songarm, R.drawable.kankan, R.drawable.darrock,
-            //익선 22~29
+            //익선 23~30
     };
     String[] rinks = {
             "https://www.instagram.com/p/CI5lInDFK69/", "https://www.instagram.com/p/CLy4jF1FT4g/?utm_medium=copy_link", "https://www.instagram.com/bbang_byeol/p/COW-ST7lnuH/?utm_medium=copy_link", "https://www.instagram.com/bbang_byeol/p/CLvV0iTlkXt/?utm_medium=copy_link", "https://www.instagram.com/p/CVcoR9HFg6H/?utm_medium=copy_link", "https://www.instagram.com/p/CNt_c7Pligy/?utm_medium=copy_link", "https://www.instagram.com/p/CMjMffpFLj4/?utm_medium=copy_link", "https://www.instagram.com/p/CWabS3YFjy8/?utm_medium=copy_link", "https://www.instagram.com/bbang_byeol/p/CKtXURPFYdd/?utm_medium=copy_link", "https://www.instagram.com/bbang_byeol/p/CRgJJqgliGT/?utm_medium=copy_link",
-            // 연남 index 0~8
-            "https://www.instagram.com/p/CVzKI0QFrrG/?utm_medium=copy_link", "https://www.instagram.com/p/CQsNY-EFZa7/?utm_medium=copy_link", "https://www.instagram.com/p/CSD8aqNFYdR/?utm_medium=copy_link", "https://www.instagram.com/bbang_byeol/p/CSgAYyhFDsX/?utm_medium=copy_link", "https://www.instagram.com/p/CW2MiAAlYnU/?utm_medium=copy_link", "https://www.instagram.com/p/CQkk6F4FLIA/?utm_medium=copy_link", "https://www.instagram.com/p/CTEi769F_g1/?utm_medium=copy_link",
-            // 신사 9~15
-            "https://www.instagram.com/p/CQfOEHoFOem/?utm_medium=copy_link", "https://www.instagram.com/p/CU9W9JBlgLe/?utm_medium=copy_link", "https://www.instagram.com/bbang_byeol/p/CL-3t79lpWZ/?utm_medium=copy_link", "https://www.instagram.com/bbang_byeol/p/COeqlzAlrhO/?utm_medium=copy_link", "https://www.instagram.com/p/CPVAZoMlyvJ/?utm_medium=copy_link", "https://www.instagram.com/p/CPuYqv_loVQ/?utm_medium=copy_link",
-            // 강남 16~21
+            "https://www.instagram.com/p/CVzKI0QFrrG/?utm_medium=copy_link", "https://www.instagram.com/p/CQsNY-EFZa7/?utm_medium=copy_link", "https://www.instagram.com/p/CSD8aqNFYdR/?utm_medium=copy_link", "https://www.instagram.com/bbang_byeol/p/CSgAYyhFDsX/?utm_medium=copy_link", "https://www.instagram.com/p/CW2MiAAlYnU/?utm_medium=copy_link", "https://www.instagram.com/p/CQkk6F4FLIA/?utm_medium=copy_link",
+            "https://www.instagram.com/p/CTEi769F_g1/?utm_medium=copy_link", "https://www.instagram.com/p/CQfOEHoFOem/?utm_medium=copy_link", "https://www.instagram.com/p/CU9W9JBlgLe/?utm_medium=copy_link", "https://www.instagram.com/bbang_byeol/p/CL-3t79lpWZ/?utm_medium=copy_link", "https://www.instagram.com/bbang_byeol/p/COeqlzAlrhO/?utm_medium=copy_link", "https://www.instagram.com/p/CPVAZoMlyvJ/?utm_medium=copy_link", "https://www.instagram.com/p/CPuYqv_loVQ/?utm_medium=copy_link",
             "https://www.instagram.com/bbang_byeol/p/CUHsGJRlmF7/?utm_medium=copy_link", "https://www.instagram.com/p/CO7fEpjFGRG/?utm_medium=copy_link", "https://www.instagram.com/p/CNmv_3sF135/?utm_medium=copy_link", "https://www.instagram.com/p/CM3hQUYlixR/?utm_medium=copy_link", "https://www.instagram.com/bbang_byeol/p/CJQi1MZFDs1/?utm_medium=copy_link", "https://www.instagram.com/bbang_byeol/p/CO2IwsgFTur/?utm_medium=copy_link", "https://www.instagram.com/p/CSL-aywljWz/?utm_medium=copy_link", "https://www.instagram.com/bbang_byeol/p/CTMaOkwFiaj/?utm_medium=copy_link",
-            //익선 22~29
     };
     LatLng[] postion ={
 
@@ -49,7 +45,8 @@ public class RestaurantList {
             new LatLng(37.52058167158564, 127.01996440875325),
             new LatLng(37.52069174133215, 127.02161801826435),
             new LatLng(37.51807038756131, 127.02051658867458),
-            new LatLng(337.52355499608041, 127.03753683402687),
+            new LatLng(37.523552832579306, 127.03753917419725),
+            new LatLng(37.52617223659705, 127.03732810772279),
             new LatLng(37.527268835570176, 127.03029762214186),
             new LatLng(37.50848047624522, 127.02370468202719),
             new LatLng(37.507042867612896, 127.0256736211936),

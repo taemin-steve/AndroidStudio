@@ -64,11 +64,11 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             case R.id.강남:
                                 region.setText("강남/논현/잠실");
-                                makeNewListView(16,6);
+                                makeNewListView(16,7);
                                 break;
                              case R.id.익선:
                                 region.setText("익선/을지로");
-                                 makeNewListView(22,8);
+                                 makeNewListView(23,8);
                                 break;
                         }
                         return false;

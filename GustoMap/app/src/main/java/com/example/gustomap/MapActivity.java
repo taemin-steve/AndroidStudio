@@ -95,7 +95,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         MarkerOptions markerOptions = new MarkerOptions(); // 지도에 모든 식당에 해당하는 마커 생성
         Bitmap RestaurantCursor = BitmapFactory.decodeResource(getResources(), R.drawable.restaurant);// 이미지를 bitmap 으로 변환
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(RestaurantCursor));
-        for( int i = 0; i <= 29; i++ ){
+        for( int i = 0; i <= 30; i++ ){
             markerOptions.position(restaurantList.postion[i]);// 마커 위도 경도 설정
             markerOptions.title(restaurantList.titles[i]);// 마커의 이름 설정
             markerOptions.snippet(restaurantList.rinks[i]);// 마커에 해당하는 음식점의 링크를 제공
