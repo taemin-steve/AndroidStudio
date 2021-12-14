@@ -26,6 +26,7 @@ public class RoadingActivity extends Activity {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(RoadingActivity.this);
             builder.setTitle("GPS를 키고 사용해 주세요!").setMessage("");
+            builder.setCancelable(false);
 
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener(){
                 @Override
